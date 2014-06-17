@@ -51,9 +51,9 @@ public abstract class ComporRuntimeException extends RuntimeException {
    *
    * @see java.lang.Throwable#getMessage()
    */
-  public String getMessage() {
-    return this.getFormattedMessage();
-  }
+//  public String getMessage() {
+//    return this.getFormattedMessage();
+//  }
 
   /*
    * (non-Javadoc)

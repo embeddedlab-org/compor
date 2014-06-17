@@ -2,15 +2,11 @@ package net.compor.frameworks.jcf.api;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import net.compor.frameworks.jcf.ComporType;
 import net.compor.frameworks.jcf.ExecutionScript;
 import net.compor.frameworks.jcf.ProvidedService;
-import net.compor.frameworks.jcf.RequiredService;
 import net.compor.frameworks.jcf.ScriptContainer;
 import net.compor.frameworks.jcf.ServiceRequest;
 import net.compor.frameworks.jcf.ServiceResponse;
@@ -47,7 +43,6 @@ public class ComporFacade {
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void addService(Component component, Method method, Service annotation) {
 		String name = (annotation.name().equals(Component.USE_METHOD_NAME)) ? 
 				method.getName() : annotation.name();
@@ -61,26 +56,9 @@ public class ComporFacade {
 		ServiceSpecification specification = 
 				new ServiceSpecification(name, description, serviceParameters, null, serviceReturn);
 		
-		Set<String> requiredServices;
-		String requiredServicesAnnot = annotation.requiredServices();
-		if (requiredServicesAnnot == Component.DO_NOT_REQUIRE_SERVICES) {
-			requiredServices = null;
-		} else {
-			String[] requiredServicesArray = requiredServicesAnnot.split(",");
-			requiredServices = new HashSet(Arrays.asList(requiredServicesArray));
-		}
-		
-		ProvidedService providedService = new ProvidedService(specification, method, requiredServices);
+		ProvidedService providedService = new ProvidedService(specification, method);
 		component.publishService(providedService);
 		
-		Collection<ProvidedService> providedServices = container.getProvidedServices();
-		for (ProvidedService service : providedServices) {
-			for (String requiredService : requiredServices) {
-				if (service.getAlias().equals(requiredService)) {
-					component.requireService(new RequiredService(service.getSpecification()));
-				}
-			}
-		}
 	}
 
 	protected void addComponents() {

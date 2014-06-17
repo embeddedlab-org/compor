@@ -535,14 +535,14 @@ public abstract class FunctionalComponent extends AbstractComponent {
   protected final ServiceResponse doIt(final ServiceRequest _serviceRequest)
       throws InvalidParametersException, IllegalAccessMethodException,
       ServiceNotImplementedException, ComponentNotStartedException {
-    String serviceAlias = this.getAliasTableRequiredServices().getAlias(
-        _serviceRequest.getServiceName());
-    if (serviceAlias != null) {
-      _serviceRequest.setServiceAlias(serviceAlias);
+//    String serviceAlias = this.getAliasTableRequiredServices().getAlias(
+//        _serviceRequest.getServiceName());
+//    if (serviceAlias != null) {
+//      _serviceRequest.setServiceAlias(serviceAlias);
       return this.invokeContainer(_serviceRequest);
-    }
-    throw new RequiredServiceNotDeclaredException(_serviceRequest
-        .getServiceName(), this);
+//    }
+//    throw new RequiredServiceNotDeclaredException(_serviceRequest
+//        .getServiceName(), this);
   }
 
   /**

@@ -12,5 +12,4 @@ public @interface Service {
 
 	String name() default Component.USE_METHOD_NAME;
 	String description() default Component.USE_METHOD_NAME;
-	String requiredServices() default Component.DO_NOT_REQUIRE_SERVICES;
 }
