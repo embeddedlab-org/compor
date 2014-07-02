@@ -3,6 +3,7 @@ package net.compor.frameworks.jcf.api;
 import net.compor.frameworks.jcf.FunctionalComponent;
 import net.compor.frameworks.jcf.ProvidedService;
 import net.compor.frameworks.jcf.RequiredService;
+import net.compor.frameworks.jcf.ServiceNotImplementedException;
 import net.compor.frameworks.jcf.ServiceRequest;
 import net.compor.frameworks.jcf.ServiceResponse;
 
@@ -29,6 +30,10 @@ public class Component extends FunctionalComponent {
 			} else {
 				return response.getData();
 			}
+			
+		} catch (ServiceNotImplementedException e) {
+			String name = e.getServiceRequest().getServiceName();
+			throw new RuntimeException("Service not implemented: " + name, e);
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
