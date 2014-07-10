@@ -20,7 +20,7 @@ public class Component extends FunctionalComponent {
 		super.addProvidedService(providedService);
 	}
 	
-	protected Object requestService(String service, Object... arguments) {
+	public Object requestService(String service, Object... arguments) {
 		try {
 			ServiceRequest request = new ServiceRequest(service, arguments);
 			ServiceResponse response = super.doIt(request);
